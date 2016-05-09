@@ -2,6 +2,8 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 //var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('js/common.js');
 
@@ -26,11 +28,14 @@ module.exports = [{
             }
         }, {
             test: /\.scss$/,
-            loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader?sourceMap!sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
         }, {
             test: /\.html$/,
             loader: 'html-loader'
         }]
+    },
+    postcss: function () {
+        return [autoprefixer, precss];
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],

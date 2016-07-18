@@ -1,5 +1,5 @@
 
-const webpack = require('webpack');
+//const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const precss = require('precss');
@@ -8,7 +8,7 @@ const autoprefixer = require('autoprefixer');
 //var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('js/common.js');
 
 module.exports = [{
-    devtool: "source-map",
+    devtool: 'source-map',
     entry: {
         app: [
             __dirname + '/src/js/main.js',
@@ -32,6 +32,8 @@ module.exports = [{
         }, {
             test: /\.html$/,
             loader: 'html-loader'
+        }, {
+            test: /_test\.js$/, loader: 'webpack-espower-loader'
         }]
     },
     postcss: function () {
